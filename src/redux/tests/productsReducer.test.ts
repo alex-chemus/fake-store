@@ -1,6 +1,7 @@
 import reducer, {
-  addProducts, clearProducts, increaseChunksCounter
+  addProducts, clearProducts, incrementChunks, clearChunks
 } from '../reducers/productsReducer'
+import type { ProductsState, Product } from '../reducers/productsReducer'
 
 test('productsReducer', () => {
   it('should return the initial state', () => {
@@ -10,12 +11,12 @@ test('productsReducer', () => {
       products: [],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should add products if products is empty", () => {
     const initialState = undefined
-    const product1 = {
+    const product1: Product = {
       id: 1,
       title: 'title1',
       price: '1.0',
@@ -28,11 +29,11 @@ test('productsReducer', () => {
       products: [product1],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should add products if products isn't empty", () => {
-    const product1 = {
+    const product1: Product = {
       id: 1,
       title: 'title1',
       price: '1.0',
@@ -40,7 +41,7 @@ test('productsReducer', () => {
       description: 'description',
       image: ''
     }
-    const product2 = {
+    const product2: Product = {
       id: 2,
       title: 'title2',
       price: '2.0',
@@ -48,7 +49,7 @@ test('productsReducer', () => {
       description: 'description',
       image: ''
     }
-    const initialState = {
+    const initialState: ProductsState = {
       products: [product1],
       chunksCounter: 0,
       chunkLength: 20,
@@ -58,11 +59,11 @@ test('productsReducer', () => {
       products: [product1, product2],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should replace produts with the same id", () => {
-    const product1 = {
+    const product1: Product = {
       id: 1,
       title: 'title1',
       price: '1.0',
@@ -70,7 +71,7 @@ test('productsReducer', () => {
       description: 'description',
       image: ''
     }
-    const product2 = {
+    const product2: Product = {
       id: 1,
       title: 'title2',
       price: '2.0',
@@ -78,7 +79,7 @@ test('productsReducer', () => {
       description: 'description',
       image: ''
     }
-    const initialState = {
+    const initialState: ProductsState = {
       products: [product1],
       chunksCounter: 0,
       chunkLength: 20,
@@ -88,11 +89,11 @@ test('productsReducer', () => {
       products: [product2],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should clear products if 'products' isn't empty", () => {
-    const product1 = {
+    const product1: Product = {
       id: 1,
       title: 'title1',
       price: '1.0',
@@ -100,7 +101,7 @@ test('productsReducer', () => {
       description: 'description',
       image: ''
     }
-    const initialState = {
+    const initialState: ProductsState = {
       products: [product1],
       chunksCounter: 0,
       chunkLength: 20,
@@ -110,11 +111,11 @@ test('productsReducer', () => {
       products: [],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should clear products if 'products' is empty", () => {
-    const initialState = {
+    const initialState: ProductsState = {
       products: [],
       chunksCounter: 0,
       chunkLength: 20,
@@ -124,20 +125,34 @@ test('productsReducer', () => {
       products: [],
       chunksCounter: 0,
       chunkLength: 20,
-    })
+    } as ProductsState)
   })
 
   it("should increase 'chunksCounter'", () => {
-    const initialState = {
+    const initialState: ProductsState = {
       products: [],
       chunksCounter: 0,
       chunkLength: 20,
     }
-    const action = increaseChunksCounter()
+    const action = incrementChunks()
     expect(reducer(initialState, action)).toEqual({
       products: [],
       chunksCounter: 1,
       chunkLength: 20,
-    })
+    } as ProductsState)
+  })
+
+  it("should clear chunksCounter", () => {
+    const initialState: ProductsState = {
+      products: [],
+      chunksCounter: 2,
+      chunkLength: 20
+    }
+    const action = clearChunks()
+    expect(reducer(initialState, action)).toEqual({
+      products: [],
+      chunksCounter: 0,
+      chunkLength: 20
+    } as ProductsState)
   })
 })

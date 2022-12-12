@@ -1,6 +1,7 @@
 import reducer, {
   setAllFilters, addFilters, removeFilters
 } from '../reducers/filtersReducer'
+import type { FiltersState } from '../reducers/filtersReducer'
 
 test('categoriesReducer', () => {
   it("should return the initial state", () => {
@@ -18,7 +19,7 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics', 'jewelery'],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("shouldn't set 'allFilters' if the array is empty", () => {
@@ -27,23 +28,23 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("should set new 'allFilters' if 'allFilters' isn't empty", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ["electronics"],
       filters: []
     }
     const action = setAllFilters(["jewelery"])
     expect(reducer(initialState, action)).toEqual({
-      allCategories: ["electronics", "jewelery"],
-      currentCategories: []
-    })
+      allFilters: ["electronics", "jewelery"],
+      filters: []
+    } as FiltersState)
   })
 
   it("should set filter values to lowecase", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: [],
       filters: []
     }
@@ -51,11 +52,11 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("should add filters if they are in 'allFilters'", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ['electronics'],
       filters: []
     }
@@ -63,7 +64,7 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
       filters: ['electronics']
-    })
+    } as FiltersState)
   })
 
   it ("shouldn't add filters if they aren't in 'allFilters'", () => {
@@ -72,11 +73,11 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("should add filters case-insensitively", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ['electronics'],
       filters: []
     }
@@ -84,11 +85,11 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
       filters: ['electronics']
-    })
+    } as FiltersState)
   })
 
   it("should remove filters if they are in 'filters'", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ['electronics'],
       filters: ['electronics']
     }
@@ -96,11 +97,11 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("shouldn't remove filters if they aren't in 'filters'", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ['electronics'],
       filters: []
     }
@@ -108,11 +109,11 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
       filters: []
-    })
+    } as FiltersState)
   })
 
   it("should remove filters case-insensitively", () => {
-    const initialState = {
+    const initialState: FiltersState = {
       allFilters: ['electronics'],
       filters: ['electronics']
     }
@@ -120,6 +121,6 @@ test('categoriesReducer', () => {
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
       filters: []
-    })
+    } as FiltersState)
   })
 })
