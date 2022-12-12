@@ -1,6 +1,6 @@
 import { loadProductsSaga } from "../sagas"
 import { select, call, put } from 'redux-saga/effects'
-import { getProducts } from "../../api"
+import { getProducts } from "@/api"
 import { addProducts, clearChunks, incrementChunks } from '../reducers/productsReducer'
 
 test('getProductsSaga', () => {
