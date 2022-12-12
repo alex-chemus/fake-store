@@ -3,7 +3,7 @@ import { call, put } from 'redux-saga/effects'
 import { setAllFilters } from '../reducers/filtersReducer'
 import { getFilters } from "@/api"
 
-test('loadFiltersSaga', () => {
+describe('loadFiltersSaga', () => {
   test('should load all possible filters', () => {
     const gen = loadFiltersSaga()
     const filters = ['electronics', 'jewelery']

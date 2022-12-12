@@ -3,7 +3,7 @@ import reducer, {
 } from '../reducers/filtersReducer'
 import type { FiltersState } from '../reducers/filtersReducer'
 
-test('categoriesReducer', () => {
+describe('filtersReducer', () => {
   it("should return the initial state", () => {
     const initialState = undefined
     const action = { type: undefined }
@@ -95,7 +95,7 @@ test('categoriesReducer', () => {
     }
     const action = removeFilters(['electronics'])
     expect(reducer(initialState, action)).toEqual({
-      allFilters: [],
+      allFilters: ['electronics'],
       filters: []
     } as FiltersState)
   })

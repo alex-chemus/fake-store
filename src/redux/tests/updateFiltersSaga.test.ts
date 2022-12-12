@@ -3,7 +3,7 @@ import { call } from 'redux-saga/effects'
 import { addFilters, removeFilters } from "../reducers/filtersReducer"
 import { clearChunks, clearProducts } from "../reducers/productsReducer"
 
-test('updateFiltersSaga', () => {
+describe('updateFiltersSaga', () => {
   it('should clear products and chunks and add new filters', () => {
     const gen = updateFiltersSaga()
     const newFilters = ['electronics']
