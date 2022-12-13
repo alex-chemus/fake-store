@@ -1,5 +1,5 @@
 import { updateFiltersSaga, getProductsSaga } from "../sagas"
-import { call, putResolve } from 'redux-saga/effects'
+import { putResolve } from 'redux-saga/effects'
 import { addFilters, removeFilters } from "../reducers/filtersReducer"
 import { clearChunks, clearProducts } from "../reducers/productsReducer"
 import { UPDATE_FILTERS } from "../constants"

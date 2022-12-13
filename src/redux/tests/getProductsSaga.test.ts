@@ -1,8 +1,7 @@
 import { getProductsSaga } from "../sagas"
-import { select, call, put, Effect } from 'redux-saga/effects'
+import { call, put, Effect } from 'redux-saga/effects'
 import { getProducts } from "@/api"
 import { addProducts, incrementChunks } from '../reducers/productsReducer'
-import { State } from "../store"
 
 describe('getProductsSaga', () => {
   it('should get products', () => {

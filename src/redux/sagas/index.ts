@@ -1,5 +1,5 @@
 import {
-  select, takeLeading, call, put, delay, putResolve
+  select, takeLeading, call, put, putResolve
 } from "redux-saga/effects"
 import {
   GET_ALL_FILTERS, GET_PRODUCTS, UPDATE_FILTERS
