@@ -6,16 +6,14 @@ import { State } from '@/redux/store'
 
 const Filters: FC = () => {
   // applied filters
-  const filters = useSelector((state: State) => state.filters.filters)
+  const appliedFilter = useSelector((state: State) => state.filters.appliedFilter)
 
   const [showPopup, setShowPopup] = useState(true)
   const [search, setSearch] = useState('')
 
   return (
     <div className={classes.FiltersSection}>
-      <ul>{
-        filters.map((filter, i) => <li key={i}>{filter}</li>)
-      }</ul>
+      <div>{appliedFilter}</div>
 
       <input
         type="text"

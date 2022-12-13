@@ -23,16 +23,7 @@ export const productsSlide = createSlice({
   initialState,
   reducers: {
     addProducts(state = initialState, action: PayloadAction<Product[]>) {
-      state.products = [
-        ...state.products.filter(product => {
-          return action.payload.every(p => p.id !== product.id)
-        }),
-        ...action.payload
-      ]
-    },
-
-    clearProducts(state = initialState) {
-      state.products = []
+      state.products = action.payload
     },
 
     incrementChunks(state = initialState) {
@@ -45,6 +36,6 @@ export const productsSlide = createSlice({
   }
 })
 
-export const { addProducts, clearProducts, incrementChunks, clearChunks } = productsSlide.actions
+export const { addProducts, incrementChunks, clearChunks } = productsSlide.actions
 
 export default productsSlide.reducer
