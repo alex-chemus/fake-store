@@ -1,0 +1,71 @@
+:root {
+  // цвета: 
+  --accent: #F76707;
+  --light-theme-border: #E9E9E9;
+  --light-theme-text: #2E2E2E;
+  --light-theme-heading: black;
+  --light-theme-placeholder: #B7B4B4;
+  --dark-theme-bg: #323232;
+  --dark-theme-heading: white;
+  --dark-theme-text: #D8D8D8;
+  --dark-theme-placeholder: #9D9D9D;
+}
+
+:root,
+:root[data-theme="light"] {
+  --border: var(--light-theme-border);
+  --text: var(--light-theme-text);
+  --heading: var(--light-theme-heading);
+  --placeholder: var(--light-theme-placeholder);
+  --bg: white;
+}
+
+:root[data-theme="dark"] {
+  --border: var(--dark-theme-bg);
+  --text: var(--darkt-theme-text);
+  --heading: var(--dark-theme-heading);
+  --placeholder: var(--dark-theme-placeholder);
+  --bg: var(--dark-theme-bg);
+}
+
+@mixin flex($jc: flex-start, $ai: center, $direction: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $direction;
+}
+
+@mixin container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+$sm: 480px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1200px;
+
+@mixin sm {
+  @media (max-width: $sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: $md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: $lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: $xl) {
+    @content;
+  }
+}
