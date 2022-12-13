@@ -1,5 +1,6 @@
 import {
-  select, takeLeading, call, put, putResolve
+  select, takeLeading, call, put, 
+  putResolve, SelectEffect, PutEffect, CallEffect
 } from "redux-saga/effects"
 import {
   GET_ALL_FILTERS, GET_PRODUCTS, UPDATE_FILTERS
@@ -10,15 +11,19 @@ import { getFilters, getProducts } from "@/api"
 import { Product, addProducts, incrementChunks, clearChunks } from "../reducers/productsReducer"
 import { updateAppliedFilter, setAllFilters } from "../reducers/filtersReducer"
 
-export function* getProductsSaga() {
-  const chunksCounter: number = yield select((state: State) => state.products.chunksCounter)
-  const chunkLength: number = yield select((state: State) => state.products.chunkLength)
-  const appliedFilter: string | null = yield select((state: State) => state.filters.appliedFilter)
+export function* getProductsSaga(): Generator<
+  SelectEffect | PutEffect | CallEffect,
+  void,
+  number | string | null | Product[]
+> {
+  const chunksCounter = (yield select((state: State) => state.products.chunksCounter)) as number
+  const chunkLength = (yield select((state: State) => state.products.chunkLength)) as number
+  const appliedFilter = (yield select((state: State) => state.filters.appliedFilter)) as string | null
   
-  const products: Product[] = yield call(getProducts, {
+  const products = (yield call(getProducts, {
     filter: appliedFilter,
     limit: chunkLength * (chunksCounter+1)
-  })
+  })) as Product[]
 
   yield put(addProducts(products))
   yield put(incrementChunks())

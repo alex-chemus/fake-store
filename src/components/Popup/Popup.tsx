@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { State } from '@/redux/store'
 import { updateFilters } from '@/redux/sagas/actionCreators'
 
-const Popup: FC<{
-  search: string,
-}> = ({ search }) => {
+const Popup: FC<{ search: string }> = ({ search }) => {
   const dispatch = useDispatch()
 
   const allFilters = useSelector((state: State) => state.filters.allFilters)
@@ -18,7 +16,6 @@ const Popup: FC<{
   }, [search, allFilters])
 
   const clickHandler = (s: string) => {
-    alert('click')
     dispatch(updateFilters(s))
   }
 

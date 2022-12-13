@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { State } from '@/redux/store'
 
 const Filters: FC = () => {
-  // applied filters
   const appliedFilter = useSelector((state: State) => state.filters.appliedFilter)
 
   const [showPopup, setShowPopup] = useState(true)
