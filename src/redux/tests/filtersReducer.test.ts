@@ -1,5 +1,5 @@
 import reducer, {
-  setAllFilters, addFilters, removeFilters
+  setAllFilters, updateAppliedFilter //addFilters, removeFilters
 } from '../reducers/filtersReducer'
 import type { FiltersState } from '../reducers/filtersReducer'
 
@@ -9,7 +9,7 @@ describe('filtersReducer', () => {
     const action = { type: undefined }
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
-      filters: []
+      appliedFilter: null
     })
   })
 
@@ -18,7 +18,7 @@ describe('filtersReducer', () => {
     const action = setAllFilters(['electronics', 'jewelery'])
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics', 'jewelery'],
-      filters: []
+      appliedFilter: null
     } as FiltersState)
   })
 
@@ -27,100 +27,77 @@ describe('filtersReducer', () => {
     const action = setAllFilters()
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
-      filters: []
+      appliedFilter: null
     } as FiltersState)
   })
 
   it("should set new 'allFilters' if 'allFilters' isn't empty", () => {
     const initialState: FiltersState = {
       allFilters: ["electronics"],
-      filters: []
+      appliedFilter: null
     }
     const action = setAllFilters(["jewelery"])
     expect(reducer(initialState, action)).toEqual({
       allFilters: ["electronics", "jewelery"],
-      filters: []
+      appliedFilter: null
     } as FiltersState)
   })
 
   it("should set filter values to lowecase", () => {
     const initialState: FiltersState = {
       allFilters: [],
-      filters: []
+      appliedFilter: null
     }
     const action = setAllFilters(['Electronics'])
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
-      filters: []
+      appliedFilter: null
     } as FiltersState)
   })
 
-  it("should add filters if they are in 'allFilters'", () => {
+  it("should update 'appliedFilter' if the filter is in 'allFilters'", () => {
     const initialState: FiltersState = {
       allFilters: ['electronics'],
-      filters: []
+      appliedFilter: null
     }
-    const action = addFilters(['electronics'])
+    //const action = addFilters(['electronics'])
+    const action = updateAppliedFilter('electronics')
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
-      filters: ['electronics']
+      appliedFilter: 'electronics'
     } as FiltersState)
   })
 
-  it ("shouldn't add filters if they aren't in 'allFilters'", () => {
+  it ("shouldn't update 'appliedFilter' if the filter isn't in 'allFilters'", () => {
     const initialState = undefined
-    const action = addFilters(['electronics'])
+    const action = updateAppliedFilter('electronics')
     expect(reducer(initialState, action)).toEqual({
       allFilters: [],
-      filters: []
+      appliedFilter: null
     } as FiltersState)
   })
 
-  it("should add filters case-insensitively", () => {
+  it("should replace previous 'appliedFilter'", () => {
     const initialState: FiltersState = {
-      allFilters: ['electronics'],
-      filters: []
+      allFilters: ['electronics', 'jewelery'],
+      appliedFilter: 'jewelery'
     }
-    const action = addFilters(['Electronics'])
+    const action = updateAppliedFilter('electronics')
     expect(reducer(initialState, action)).toEqual({
-      allFilters: ['electronics'],
-      filters: ['electronics']
+      allFilters: ['electronics', 'jewelery'],
+      appliedFilter: 'electronics'
     } as FiltersState)
   })
 
-  it("should remove filters if they are in 'filters'", () => {
+  it("should update 'appliedFilter' case-insensitively", () => {
     const initialState: FiltersState = {
       allFilters: ['electronics'],
-      filters: ['electronics']
+      appliedFilter: null
     }
-    const action = removeFilters(['electronics'])
+    const action = updateAppliedFilter('Electronics')
     expect(reducer(initialState, action)).toEqual({
       allFilters: ['electronics'],
-      filters: []
-    } as FiltersState)
-  })
-
-  it("shouldn't remove filters if they aren't in 'filters'", () => {
-    const initialState: FiltersState = {
-      allFilters: ['electronics'],
-      filters: []
-    }
-    const action = removeFilters(['electronics'])
-    expect(reducer(initialState, action)).toEqual({
-      allFilters: ['electronics'],
-      filters: []
-    } as FiltersState)
-  })
-
-  it("should remove filters case-insensitively", () => {
-    const initialState: FiltersState = {
-      allFilters: ['electronics'],
-      filters: ['electronics']
-    }
-    const action = removeFilters(['Electronics'])
-    expect(reducer(initialState, action)).toEqual({
-      allFilters: ['electronics'],
-      filters: []
+      appliedFilter: 'electronics'
     } as FiltersState)
   })
 })

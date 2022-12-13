@@ -8,7 +8,7 @@ describe('getProductsSaga', () => {
     const gen = getProductsSaga()
     const chunksCounter = 1
     const chunkLength = 20
-    const filters = ['electronics']
+    const filter = 'electronics'
     const products = [{
       id: 1,
       title: 'title',
@@ -28,9 +28,9 @@ describe('getProductsSaga', () => {
     expect((gen.next(chunkLength as any).value as Effect).type).toEqual("SELECT")
 
     // шаг 4. сделать вызов api и передать текущие фильтры
-    expect(gen.next(filters as any).value).toEqual(
+    expect(gen.next(filter as any).value).toEqual(
       call(getProducts, {
-        filters,
+        filter,
         limit: chunkLength * (chunksCounter+1)
       })
     )

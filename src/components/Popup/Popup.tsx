@@ -19,10 +19,7 @@ const Popup: FC<{
 
   const clickHandler = (s: string) => {
     alert('click')
-    dispatch(updateFilters({
-      remove: false,
-      filters: [s]
-    }))
+    dispatch(updateFilters(s))
   }
 
   return (<>

@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
   allFilters: [] as string[],
-  filters: [] as string[]
+  appliedFilter: null as (string | null)
 }
 
 export type FiltersState = typeof initialState
@@ -20,27 +20,14 @@ export const filtersReducer = createSlice({
       ]
     },
 
-    addFilters(state = initialState, action: PayloadAction<string[]>) {
-      action.payload
-        .map(filter => filter.toLocaleLowerCase())
-        .forEach(filter => {
-          if (state.allFilters.includes(filter))
-            state.filters.push(filter)
-        })
-    },
-
-    removeFilters(state = initialState, action: PayloadAction<string[]>) {
-      action.payload
-        .map(filter => filter.toLocaleLowerCase())
-        .forEach(filter => {
-          const index = state.filters.findIndex(f => f === filter)
-          if (index >= 0)
-            state.filters.splice(index, 1)
-        })
+    updateAppliedFilter(state = initialState, action: PayloadAction<string | null>) {
+      if (!action.payload) return
+      if (state.allFilters.includes(action.payload.toLocaleLowerCase()))
+        state.appliedFilter = action.payload.toLocaleLowerCase()
     }
   }
 })
 
-export const { setAllFilters, addFilters, removeFilters } = filtersReducer.actions
+export const { setAllFilters, updateAppliedFilter } = filtersReducer.actions
 
 export default filtersReducer.reducer
