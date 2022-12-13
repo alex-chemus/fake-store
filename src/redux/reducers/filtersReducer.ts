@@ -12,11 +12,32 @@ export const filtersReducer = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setAllFilters(state = initialState, action: PayloadAction<string[] | undefined>) {},
+    setAllFilters(state = initialState, action: PayloadAction<string[] | undefined>) {
+      if (action.payload === undefined) return
+      state.allFilters = [
+        ...state.allFilters,
+        ...action.payload.map(f => f.toLocaleLowerCase())
+      ]
+    },
 
-    addFilters(state = initialState, action: PayloadAction<string[] | undefined>) {},
+    addFilters(state = initialState, action: PayloadAction<string[]>) {
+      action.payload
+        .map(filter => filter.toLocaleLowerCase())
+        .forEach(filter => {
+          if (state.allFilters.includes(filter))
+            state.filters.push(filter)
+        })
+    },
 
-    removeFilters(state = initialState, action: PayloadAction<string[] | undefined>) {}
+    removeFilters(state = initialState, action: PayloadAction<string[]>) {
+      action.payload
+        .map(filter => filter.toLocaleLowerCase())
+        .forEach(filter => {
+          const index = state.filters.findIndex(f => f === filter)
+          if (index >= 0)
+            state.filters.splice(index, 1)
+        })
+    }
   }
 })
 

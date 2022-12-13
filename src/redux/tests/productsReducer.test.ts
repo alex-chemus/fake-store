@@ -3,7 +3,7 @@ import reducer, {
 } from '../reducers/productsReducer'
 import type { ProductsState, Product } from '../reducers/productsReducer'
 
-test('productsReducer', () => {
+describe('productsReducer', () => {
   it('should return the initial state', () => {
     const initialState = undefined
     const action = { type: undefined }

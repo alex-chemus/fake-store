@@ -22,13 +22,26 @@ export const productsSlide = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    addProducts(state = initialState, action: PayloadAction<Product[]>) {},
+    addProducts(state = initialState, action: PayloadAction<Product[]>) {
+      state.products = [
+        ...state.products.filter(product => {
+          return action.payload.every(p => p.id !== product.id)
+        }),
+        ...action.payload
+      ]
+    },
 
-    clearProducts(state = initialState) {},
+    clearProducts(state = initialState) {
+      state.products = []
+    },
 
-    incrementChunks(state = initialState) {},
+    incrementChunks(state = initialState) {
+      state.chunksCounter++
+    },
 
-    clearChunks(state = initialState) {}
+    clearChunks(state = initialState) {
+      state.chunksCounter = 0
+    }
   }
 })
 

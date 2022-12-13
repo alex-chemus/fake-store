@@ -9,4 +9,12 @@ module.exports = {
       '@': resolvePath('src/')
     },
   },
+  jest: {
+    configure: {
+      verbose: true,
+      moduleNameMapper: {
+        "^@/(.*)$": "<rootDir>/src/$1"
+      }
+    }
+  }
 }

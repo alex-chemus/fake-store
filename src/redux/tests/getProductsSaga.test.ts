@@ -1,11 +1,12 @@
-import { loadProductsSaga } from "../sagas"
-import { select, call, put } from 'redux-saga/effects'
+import { getProductsSaga } from "../sagas"
+import { select, call, put, Effect } from 'redux-saga/effects'
 import { getProducts } from "@/api"
-import { addProducts, clearChunks, incrementChunks } from '../reducers/productsReducer'
+import { addProducts, incrementChunks } from '../reducers/productsReducer'
+import { State } from "../store"
 
-test('getProductsSaga', () => {
+describe('getProductsSaga', () => {
   it('should get products', () => {
-    const gen = loadProductsSaga(false)
+    const gen = getProductsSaga()
     const chunksCounter = 1
     const chunkLength = 20
     const filters = ['electronics']
@@ -19,35 +20,29 @@ test('getProductsSaga', () => {
     }]
 
     // шаг 1. получить кол-во чанков
-    expect(gen.next().value).toEqual(
-      select(state => state.products.chunksCounter)
-    )
+    expect((gen.next().value as Effect).type).toEqual("SELECT")
 
     // шаг 2. получить длину чанка и передать кол-во чанков
-    expect(gen.next(chunksCounter).value).toEqual(
-      select(state => state.producs.chunkLength)
-    )
+    expect((gen.next(chunksCounter as any).value as Effect).type).toEqual("SELECT")
 
     // шаг 3. получить текущие фильтры и передать длина чанка
-    expect(gen.next(chunkLength).value).toEqual(
-      select(state => state.filters.filters)
-    )
+    expect((gen.next(chunkLength as any).value as Effect).type).toEqual("SELECT")
 
     // шаг 4. сделать вызов api и передать текущие фильтры
-    expect(gen.next(filters).value).toEqual(
+    expect(gen.next(filters as any).value).toEqual(
       call(getProducts, {
-        filters: ['electronics'],
-        limit: 20
+        filters,
+        limit: chunkLength * (chunksCounter+1)
       })
     )
 
     // шаг 5. обновить товары в redux
-    expect(gen.next(products).value).toEqual(
+    expect(gen.next(products as any).value).toEqual(
       put(addProducts(products))
     )
 
     expect(gen.next().value).toEqual(
-      put(clearChunks())
+      put(incrementChunks())
     )
 
     expect(gen.next().done).toEqual(true)
