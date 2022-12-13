@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+// @ts-check
+
 describe('search', () => {
   it('user can set filters', () => {
     cy.visit('/')

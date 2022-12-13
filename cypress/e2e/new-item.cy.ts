@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+// @ts-check
+
 describe('new item', () => {
   it('user can open/close editor modal', () => {
     cy.visit('/')
