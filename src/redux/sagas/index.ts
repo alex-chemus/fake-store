@@ -29,12 +29,12 @@ export function* getAllFiltersSaga() {
   yield put(setAllFilters(filters))
 }
 
-type Payload = {
+export type UpdatePayload = {
   remove: boolean,
   filters: string[]
 }
 
-export function* updateFiltersSaga(action: PayloadAction<Payload>) {
+export function* updateFiltersSaga(action: PayloadAction<UpdatePayload>) {
   const { remove, filters } = action.payload
   if (!remove) yield putResolve(addFilters(filters))
   else yield putResolve(removeFilters(filters))

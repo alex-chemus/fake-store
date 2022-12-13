@@ -2,7 +2,7 @@ import { updateFiltersSaga, getProductsSaga } from "../sagas"
 import { putResolve } from 'redux-saga/effects'
 import { addFilters, removeFilters } from "../reducers/filtersReducer"
 import { clearChunks, clearProducts } from "../reducers/productsReducer"
-import { UPDATE_FILTERS } from "../constants"
+import { updateFilters } from "../sagas/actionCreators"
 
 describe('updateFiltersSaga', () => {
   it('should clear products and chunks and add new filters', () => {
@@ -10,10 +10,7 @@ describe('updateFiltersSaga', () => {
       remove: false,
       filters: ['electronics']
     }
-    const gen = updateFiltersSaga({
-      type: UPDATE_FILTERS,
-      payload
-    })
+    const gen = updateFiltersSaga(updateFilters(payload))
 
     expect(gen.next().value).toEqual(putResolve(addFilters(payload.filters)))
 
@@ -31,10 +28,7 @@ describe('updateFiltersSaga', () => {
       remove: true,
       filters: ['electronics']
     }
-    const gen = updateFiltersSaga({
-      type: UPDATE_FILTERS,
-      payload
-    })
+    const gen = updateFiltersSaga(updateFilters(payload))
 
     expect(gen.next().value).toEqual(putResolve(removeFilters(payload.filters)))
 
