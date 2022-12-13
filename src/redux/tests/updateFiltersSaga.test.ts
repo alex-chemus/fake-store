@@ -1,20 +1,14 @@
 import { updateFiltersSaga, getProductsSaga } from "../sagas"
 import { putResolve } from 'redux-saga/effects'
-import { addFilters, removeFilters } from "../reducers/filtersReducer"
-import { clearChunks, clearProducts } from "../reducers/productsReducer"
+import { updateAppliedFilter } from "../reducers/filtersReducer"
+import { clearChunks } from "../reducers/productsReducer"
 import { updateFilters } from "../sagas/actionCreators"
 
 describe('updateFiltersSaga', () => {
-  it('should clear products and chunks and add new filters', () => {
-    const payload = {
-      remove: false,
-      filters: ['electronics']
-    }
-    const gen = updateFiltersSaga(updateFilters(payload))
+  it('should clear products and chunks and update appliedFilter', () => {
+    const gen = updateFiltersSaga(updateFilters('electronics'))
 
-    expect(gen.next().value).toEqual(putResolve(addFilters(payload.filters)))
-
-    expect(gen.next().value).toEqual(putResolve(clearProducts()))
+    expect(gen.next().value).toEqual(putResolve(updateAppliedFilter('electronics')))
 
     expect(gen.next().value).toEqual(putResolve(clearChunks()))
 
@@ -23,20 +17,8 @@ describe('updateFiltersSaga', () => {
     expect(gen.next().done).toEqual(true)
   })
 
-  it('should clear products and chunks and remove new filters', () => {
-    const payload = {
-      remove: true,
-      filters: ['electronics']
-    }
-    const gen = updateFiltersSaga(updateFilters(payload))
-
-    expect(gen.next().value).toEqual(putResolve(removeFilters(payload.filters)))
-
-    expect(gen.next().value).toEqual(putResolve(clearProducts()))
-
-    expect(gen.next().value).toEqual(putResolve(clearChunks()))
-
-    expect(JSON.stringify(gen.next().value)).toEqual(JSON.stringify(getProductsSaga()))
+  it('should terminate if the payload is nullish', () => {
+    const gen = updateFiltersSaga(updateFilters(null))
 
     expect(gen.next().done).toEqual(true)
   })

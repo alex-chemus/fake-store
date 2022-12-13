@@ -1,0 +1,13 @@
+@import '@/style.scss';
+
+.MainContainer {
+  @include container;
+  padding: 50px;
+}
+
+.FiltersSection {
+  margin-bottom: 50px;
+}
+
+.FeedSection {
+}
