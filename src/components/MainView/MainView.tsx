@@ -14,8 +14,6 @@ const MainView: FC = () => {
       <section className={classes.FeedSection}>
         <Feed />
       </section>
-
-      <EditorModal />
     </main>
   )
 }

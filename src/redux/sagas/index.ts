@@ -34,9 +34,7 @@ export function* getAllFiltersSaga() {
   yield put(setAllFilters(filters))
 }
 
-export function* updateFiltersSaga(action: PayloadAction<string | null>) {
-  if (!action.payload) return
-  
+export function* updateFiltersSaga(action: PayloadAction<string | null>) { 
   yield putResolve(updateAppliedFilter(action.payload))
 
   yield putResolve(clearChunks())

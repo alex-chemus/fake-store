@@ -1,14 +1,22 @@
+@import './reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 :root {
-  // цвета: 
+  // colors 
   --accent: #F76707;
   --light-theme-border: #E9E9E9;
   --light-theme-text: #2E2E2E;
   --light-theme-heading: black;
   --light-theme-placeholder: #B7B4B4;
+  --light-theme-shadow: 0 0 5px 0 rgba(0 0 0 / .1);
   --dark-theme-bg: #323232;
   --dark-theme-heading: white;
   --dark-theme-text: #D8D8D8;
   --dark-theme-placeholder: #9D9D9D;
+  --dark-theme-shadow: 0 0 10px 0 rgba(0 0 0 / .25);
+  
+  // fonts
+  --roboto: 'Roboto', sans-serif;
 }
 
 :root,
@@ -18,6 +26,11 @@
   --heading: var(--light-theme-heading);
   --placeholder: var(--light-theme-placeholder);
   --bg: white;
+  --shadow: var(--light-theme-shadow);
+
+  body {
+    background-color: #fafafa;
+  }
 }
 
 :root[data-theme="dark"] {
@@ -26,6 +39,11 @@
   --heading: var(--dark-theme-heading);
   --placeholder: var(--dark-theme-placeholder);
   --bg: var(--dark-theme-bg);
+  --shadow: var(--dark-theme-shadow);
+
+  body {
+    background-color: #434343;
+  }
 }
 
 @mixin flex($jc: flex-start, $ai: center, $direction: row) {
@@ -37,7 +55,7 @@
 
 @mixin container {
   max-width: 1200px;
-  width: 100%;
+  width: calc(100% - 30px);
   margin: 0 auto;
 }
 
@@ -50,6 +68,19 @@
   height: 80vh;
   background-color: var(--bg);
   border: 1px solid red;
+}
+
+@mixin backdrop($blur: false) {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  @if $blur {
+    background-color: rgba(0 0 0 / .5);
+  }
 }
 
 $sm: 480px;
@@ -79,4 +110,12 @@ $xl: 1200px;
   @media (max-width: $xl) {
     @content;
   }
+}
+
+button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  @include flex(center, center);
+  cursor: pointer;
 }
