@@ -1,6 +1,10 @@
 @import './reset.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
+* {
+  transition: all ease-out .1s;
+}
+
 :root {
   // colors 
   --accent: #F76707;
@@ -35,7 +39,7 @@
 
 :root[data-theme="dark"] {
   --border: var(--dark-theme-bg);
-  --text: var(--darkt-theme-text);
+  --text: var(--dark-theme-text);
   --heading: var(--dark-theme-heading);
   --placeholder: var(--dark-theme-placeholder);
   --bg: var(--dark-theme-bg);

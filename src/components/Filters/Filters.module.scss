@@ -19,6 +19,7 @@
   color: var(--text);
   border: none;
   outline: none;
+  background-color: transparent;
 }
 
 .Badge {
@@ -28,4 +29,12 @@
   color: white;
   font-family: var(--roboto);
   font-size: 12px;
+}
+
+.ResetButton {
+  color: var(--text);
+
+  &:hover {
+    color: var(--heading)
+  }
 }
