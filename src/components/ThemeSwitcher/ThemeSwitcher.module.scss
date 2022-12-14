@@ -1,0 +1,15 @@
+@import '@/style.scss';
+
+.ThemeSwitcher {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg);
+  border-radius: 100vmax;
+  z-index: 1;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}

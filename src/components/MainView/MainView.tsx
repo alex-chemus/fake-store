@@ -3,6 +3,7 @@ import classes from './MainView.module.scss'
 import Filters from "../Filters/Filters"
 import Feed from "../Feed/Feed"
 import EditorModal from "../EditorModal/EditorModal"
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher"
 
 const MainView: FC = () => {
   return (
@@ -14,6 +15,8 @@ const MainView: FC = () => {
       <section className={classes.FeedSection}>
         <Feed />
       </section>
+
+      <ThemeSwitcher />
     </main>
   )
 }
