@@ -8,7 +8,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getAllFilters())
-    document.title = 'Fake Store'
   }, [])
 
   return <MainView />
