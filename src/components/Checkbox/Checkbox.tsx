@@ -7,7 +7,7 @@ const Checkbox: FC<{
   children: ReactNode
 }> = ({ checked, check, children }) => {
   return (
-    <button onClick={check} className={classes.Checkbox}>
+    <button data-test="radio" onClick={check} className={classes.Checkbox}>
       <div className={classes.Border} />
       {checked ? <div className={classes.Dot} /> : null}
       {children}

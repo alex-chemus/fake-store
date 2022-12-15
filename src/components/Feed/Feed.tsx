@@ -4,6 +4,7 @@ import { State } from '@/redux/store'
 import { getProducts } from '@/redux/sagas/actionCreators'
 import classes from './Feed.module.scss'
 import Card from '../Card/Card'
+import Loader from '../Loader/Loader'
 
 const Feed: FC = () => {
   const products = useSelector((state: State) => state.products.products)
@@ -12,6 +13,12 @@ const Feed: FC = () => {
   useEffect(() => {
     dispatch(getProducts())
   }, [])
+
+  if (products.length === 0) return (
+    <section className={classes.Loading}>
+      <Loader />
+    </section>
+  )
 
   return (
     <section className={classes.Feed}>
