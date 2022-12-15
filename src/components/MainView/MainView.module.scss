@@ -1,0 +1,18 @@
+@import '@/style.scss';
+
+.MainContainer {
+  @include container;
+  padding: 50px;
+}
+
+.FiltersSection {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  max-width: 585px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.FeedSection {
+}

@@ -1,0 +1,104 @@
+@import '@/style.scss';
+
+.Card {
+  border: 1px solid red;
+  padding: 15px;
+  border-radius: 10px;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background-color: white;
+  @include flex(flex-start, flex-start, column);
+  cursor: pointer;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  @include md {
+    & > *:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 20px;
+  }
+
+  @include sm {
+    @include flex(flex-start, flex-start, column);
+  }
+}
+
+:root[data-theme="light"] .Card:hover {
+  box-shadow: 0 0 5px 0 rgba(0 0 0 / .25);
+}
+
+:root[data-theme="dark"] .Card:hover {
+  box-shadow: 0 0 10px 0 rgba(0 0 0 / .45);
+}
+
+.Card img {
+  height: 200px;
+  width: 300px;
+  max-width: 100%;
+
+  align-self: center;
+  object-fit: contain;
+
+  @include md {
+    height: 100px;
+    width: 120px;
+  }
+}
+
+.Wrapper {
+  flex-grow: 1;
+  @include flex(flex-start, flex-start, column);
+  align-self: stretch;
+
+  & > *:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.Card h6 {
+  font-family: var(--roboto);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--light-theme-heading);
+  margin: 0;
+  margin-bottom: 10px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+
+  @include md {
+    font-size: 18px;
+
+    -webkit-line-clamp: 2;
+  }
+
+  @include sm {
+    -webkit-line-clamp: 3;
+  }
+}
+
+.Card small {
+  font-family: var(--roboto);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--light-theme-text);
+  margin-top: auto;
+  align-self: flex-end;
+  //color: var(--accent);
+
+  @include md {
+    font-size: 14px;
+  }
+}
+
+.Card:hover small {
+  color: var(--accent);
+}
