@@ -1,0 +1,31 @@
+@import '@/style.scss';
+
+.Checkbox {
+  position: relative;
+  padding-left: 30px;
+  font-family: var(--roboto);
+  font-size: 16px;
+  color: var(--text);
+}
+
+.Border {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--placeholder);
+  border-radius: 100vmax;
+}
+
+.Dot {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 100vmax;
+  background-color: var(--accent);
+}

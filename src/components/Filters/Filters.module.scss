@@ -1,3 +1,40 @@
 @import '@/style.scss';
 
-.FiltersSection {}
+.FiltersSection {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background-color: var(--light-theme-bg);
+  height: 45px;
+  padding: 0 23px;
+  @include flex(space-between, center);
+  //position: relative;
+}
+
+.Input {
+  width: 100%;
+  z-index: 3;
+  font-family: var(--roboto);
+  font-size: 16px;
+  color: var(--light-theme-text);
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.Badge {
+  background-color: var(--accent);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: white;
+  font-family: var(--roboto);
+  font-size: 12px;
+}
+
+.ResetButton {
+  color: var(--light-theme-text);
+
+  &:hover {
+    color: var(--light-theme-heading)
+  }
+}

@@ -2,4 +2,123 @@
 
 .EditorModal {
   @include modal;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: var(--bg);
+  padding: 80px;
+  border-radius: 20px;
+
+  @include md {
+    padding: 50px;
+  }
+
+  @include sm {
+    padding: 30px;
+  }
+
+  overflow-y: scroll;
+  overscroll-behavior: none;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin: 20px 0;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--placeholder);
+    border-radius: 3px;
+  }
+}
+
+.FormContainer {
+  @include flex(flex-start, flex-start, column);
+
+  & > *:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.Backdrop {
+  @include backdrop(true);
+}
+
+.CloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: var(--text);
+}
+
+.Field,
+.RadioButtons {
+  @include flex(flex-start, baseline);
+  width: 100%;
+
+  @include md {
+    flex-direction: column;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.Field span,
+.RadioButtons p {
+  font-family: var(--roboto);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--heading);
+  width: 150px;
+}
+
+.TextInput {
+  padding: 10px 23px;
+  //height: 45px;
+  border-radius: 10px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  resize: none;
+  font-family: var(--roboto);
+  font-size: 16px;
+  color: var(--light-theme-text);
+  outline: none;
+  flex-grow: 1;
+
+  &.Short {
+    flex-grow: 0;
+    width: 175px;
+  }
+
+  @include md {
+    align-self: stretch;
+  }
+}
+
+textarea.TextInput {
+  height: auto;
+}
+
+.CheckboxWrapper {
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.AddButton {
+  height: 40px;
+  @include flex(center, center);
+  padding: 0 14px;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 10px;
+  font-family: var(--roboto);
+  font-size: 16px;
 }

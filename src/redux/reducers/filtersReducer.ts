@@ -21,8 +21,9 @@ export const filtersReducer = createSlice({
     },
 
     updateAppliedFilter(state = initialState, action: PayloadAction<string | null>) {
-      if (!action.payload) return
-      if (state.allFilters.includes(action.payload.toLocaleLowerCase()))
+      if (action.payload === null)
+        state.appliedFilter = null
+      else if (state.allFilters.includes(action.payload.toLocaleLowerCase()))
         state.appliedFilter = action.payload.toLocaleLowerCase()
     }
   }

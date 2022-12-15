@@ -1,0 +1,44 @@
+import React, { FC, useEffect, useState } from 'react'
+import classes from './ThemeSwitcher.module.scss'
+
+const ThemeSwitcher: FC = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+  useEffect(() => {
+    const root = document.querySelector(':root') as HTMLElement
+    setTheme(root.getAttribute('data-theme') as typeof theme)
+  }, [])
+
+  const changeTheme = () => {
+    const root = document.querySelector(':root') as HTMLElement
+
+    if (theme === 'light') { // to dark
+      root.setAttribute('data-theme', 'dark')
+      setTheme('dark')
+    } else {
+      root.setAttribute('data-theme', 'light')
+      setTheme('light')
+    }
+  }
+
+  if (theme === 'light') return (
+    <button className={classes.ThemeSwitcher} onClick={changeTheme}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+      </svg>
+    </button>
+  )
+
+  return (
+    <button className={classes.ThemeSwitcher} onClick={changeTheme}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+      </svg>
+    </button>
+  )
+}
+
+export default ThemeSwitcher

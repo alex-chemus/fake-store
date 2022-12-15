@@ -16,10 +16,4 @@ describe('updateFiltersSaga', () => {
     
     expect(gen.next().done).toEqual(true)
   })
-
-  it('should terminate if the payload is nullish', () => {
-    const gen = updateFiltersSaga(updateFilters(null))
-
-    expect(gen.next().done).toEqual(true)
-  })
 })
