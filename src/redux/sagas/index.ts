@@ -1,11 +1,15 @@
 import {
   select, takeLeading, call, put, 
-  putResolve, SelectEffect, PutEffect, CallEffect
+  putResolve, SelectEffect, PutEffect, CallEffect, all, fork,
+  actionChannel,
+  take,
+  ActionPattern
 } from "redux-saga/effects"
 import {
   GET_ALL_FILTERS, GET_PRODUCTS, UPDATE_FILTERS
 } from "../constants"
 import type { PayloadAction } from "@reduxjs/toolkit"
+import type { ActionChannelEffect } from "redux-saga/effects"
 import { State } from "../store"
 import { getFilters, getProducts } from "@/api"
 import { Product, addProducts, incrementChunks, clearChunks } from "../reducers/productsReducer"
@@ -42,12 +46,26 @@ export function* updateFiltersSaga(action: PayloadAction<string | null>) {
   yield getProductsSaga()
 }
 
-export function* watchSaga() {
-  yield takeLeading(GET_PRODUCTS, getProductsSaga)
-  yield takeLeading(GET_ALL_FILTERS, getAllFiltersSaga)
-  yield takeLeading(UPDATE_FILTERS, updateFiltersSaga)
+export function* watchProductsSata() {
+  yield takeLeading(GET_PRODUCTS, getProductsSaga) 
+}
+
+export function* watchAllFiltersSaga() {
+  yield takeLeading(GET_ALL_FILTERS, getAllFiltersSaga) 
+}
+
+export function* watchUpdateFiltersSaga() {
+  const channel = (yield actionChannel(UPDATE_FILTERS)) as ActionPattern<PayloadAction<string | null>>
+  while (true) {
+    const action: PayloadAction<string | null> = yield take(channel)
+    yield call(updateFiltersSaga, action)
+  }
 }
 
 export default function* rootSaga() {
-  yield watchSaga()
+  yield all([
+    fork(watchProductsSata),
+    fork(watchAllFiltersSaga),
+    fork(watchUpdateFiltersSaga)
+  ])
 }

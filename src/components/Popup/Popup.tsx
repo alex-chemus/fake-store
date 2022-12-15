@@ -16,7 +16,7 @@ const Popup: FC<{
   if (searchFilters.length === 0) return null
 
   return (<>
-    <ul className={classes.Popup}>{
+    <ul className={classes.Popup} id="filters-popup">{
       searchFilters.map((filter, i) => {
         return (
           <li key={i}>
