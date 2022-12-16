@@ -18,7 +18,6 @@ const Feed: FC = () => {
     if (!observable.current) return
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        console.log('intersects')
         dispatch(getProducts())
       }
     }, {
